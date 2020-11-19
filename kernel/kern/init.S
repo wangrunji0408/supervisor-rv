@@ -101,6 +101,10 @@ bss_init_done:
     ori s0, s0, 1
     csrw mtvec, s0
 mtvec_done:
+
+    csrsi mstatus, MSTATUS_MIE      // 打开中断
+    li t0, MIE_MTIE
+    csrw mie, t0                    // 打开时钟中断
 #endif
 
     la sp, KERNEL_STACK_INIT         // 设置内核栈
